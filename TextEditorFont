@@ -1,0 +1,53 @@
+from guizero import App, TextBox, PushButton, Box, Combo, Slider
+
+app = App(title="texteditor")
+def open_file():
+    with open(file_name.value, "r") as f:
+        editor.value = f.read()
+
+# function for writing files
+def save_file():
+    with open(file_name.value, "w") as f:
+        f.write(editor.value)
+
+def change_font():
+    editor.font = font.value
+
+def change_text_size():
+    editor.text_size = size.value
+    editor.resize(1, 1)
+    editor.resize("fill", "fill")
+
+app = App(title="textzero")
+
+file_controls = Box(app, align="top", width="fill", border=True)
+file_name = TextBox(file_controls, text="text_file.txt", width=50,
+align="left")
+
+# create a box to house the controls, we want the box to span the entire width of the app
+
+
+# create a TextBox for the file name
+file_name = TextBox(file_controls, text="text_file.txt", width=40,
+align="left")
+
+editor = TextBox(app, multiline=True, height="fill", width="fill")
+
+# create a save button which uses the save_file function
+save_button = PushButton(file_controls, text="Save", align="right", command = save_file)
+
+# create an open button which uses the open_file function
+
+open_button = PushButton(file_controls, text="Open", align="right", command = open_file)
+
+preferences_controls = Box(app, align="bottom", width="fill", border=True)
+
+font = Combo(preferences_controls, options=["courier", "times new roman", "verdana"], align="", command=change_font)
+
+size = Slider(preferences_controls, align="left", start = 8, end = 42,
+command=change_text_size)
+
+# create a TextBox which is not in the box and fills the rest of the GUI
+
+
+app.display()
